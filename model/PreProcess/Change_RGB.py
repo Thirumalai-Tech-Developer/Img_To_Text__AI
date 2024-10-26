@@ -1,9 +1,8 @@
-from torch.utils.data import Dataset
-import pandas as pd
-from PIL import Image 
 import os
+import pandas as pd
+from torch.utils.data import Dataset
+from PIL import Image
 
-# Custom Dataset
 class CandlestickDataset(Dataset):
     def __init__(self, csv_files, processor):
         # Combine all CSV files into a single DataFrame
@@ -16,14 +15,14 @@ class CandlestickDataset(Dataset):
     def __getitem__(self, idx):
         row = self.data.iloc[idx]
         image_path = row['Input']
-        label = row['Output']  # Corresponding label
+        label = row['Output']
 
         # Check if the image file exists
         if not os.path.exists(image_path):
             print(f"Warning: Image file {image_path} not found. Skipping entry.")
             return self.__getitem__((idx + 1) % len(self.data))  # Move to the next item if missing
 
-        # Load image and convert it to RGB format
+        # Load image and convert to RGB
         image = Image.open(image_path).convert("RGB")
         
         # Prepare inputs for the model
