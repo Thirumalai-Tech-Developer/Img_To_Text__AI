@@ -1,18 +1,17 @@
 import torch
-from LoadModel import Load_Model as model
-from LoadModel import device
+from LoadModel import Load_Model
 from PreProcess import data_loader
 
 # Training loop
-optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5)
-model.train()
+optimizer = torch.optim.AdamW(Load_Model.model.parameters(), lr=5e-5)
+Load_Model.model.train()
 
 for epoch in range(3):  # Adjust the number of epochs as needed
     for batch in data_loader:
-        inputs = {k: v.to(device) for k, v in batch.items()}
+        inputs = {k: v.to(Load_Model.device) for k, v in batch.items()}
         
         # Forward pass
-        outputs = model(**inputs)
+        outputs = Load_Model.model(**inputs)
         loss = outputs.loss
 
         # Backward pass and optimization
