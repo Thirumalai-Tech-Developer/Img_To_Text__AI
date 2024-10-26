@@ -1,6 +1,6 @@
 import glob
 from Change_RGB import CandlestickDataset , processor
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 # Load Data
 
 csv_files = glob.glob("define_your_data_path")
