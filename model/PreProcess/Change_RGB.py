@@ -15,7 +15,7 @@ class CandlestickDataset(Dataset):
 
     def __getitem__(self, idx):
         row = self.data.iloc[idx]
-        image_path = row['Input']  # Path to the image
+        image_path = row['Input']
         label = row['Output']  # Corresponding label
 
         # Check if the image file exists
